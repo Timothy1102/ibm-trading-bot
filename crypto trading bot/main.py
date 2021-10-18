@@ -1,3 +1,5 @@
+from AlgorithmImports import *
+
 class CreativeRedHornet(QCAlgorithm):
 
     def Initialize(self):
@@ -7,16 +9,20 @@ class CreativeRedHornet(QCAlgorithm):
         
         self.Settings.FreePortfolioValuePercentage = 0.05
         self.positionSizeUSD = 5000
-        self.rsiEntryThreshold = 70 # enter position if rsi rises above this threshold
-        self.rsiExitThreshold = 60 # exit position if rsi drops below this threshold
-        self.minimumVolume = 1000000 # filters out symbols with 30 day avg daily dollar volume less than this 
+        # ì rsi is greater than 70, enter positionn
+        self.rsiEntryThreshold = 70 
+        # if rsi is less than 60, exit positio
+        self.rsiExitThreshold = 60 
+        # only choose cryptos that have 30 days volume average greater than this 
+        self.minimumVolume = 1000000 
         
-        # add data for all tickers
+        # all the coins we are interested in, then they will be filtered out
         universe = ['BTCUSD' , 'ETHUSD', 'ETCUSD', 'RRTUSD', 'ZECUSD', 'XMRUSD', 'XRPUSD', 'EOSUSD', 'SANUSD', 'OMGUSD', 'NEOUSD', 'ETPUSD', 'BTGUSD', 'SNTUSD', 'BATUSD', 'FUNUSD', 'ZRXUSD', 'TRXUSD', 'REQUSD', 'LRCUSD', 'WAXUSD', 'DAIUSD', 'BFTUSD', 'ODEUSD', 'ANTUSD', 'XLMUSD', 'XVGUSD', 'MKRUSD', 'KNCUSD', 'LYMUSD', 'UTKUSD', 'VEEUSD', 'ESSUSD', 'IQXUSD', 'ZILUSD', 'BNTUSD', 'XRAUSD', 'VETUSD', 'GOTUSD', 'XTZUSD', 'MLNUSD', 'PNKUSD', 'DGBUSD', 'BSVUSD', 'ENJUSD', 'PAXUSD']
         self.pairs = [ Pair(self, ticker, self.minimumVolume) for ticker in universe ]
         self.SetBenchmark("BTCUSD") 
         self.SetWarmup(30)
         
+        # test
         self.Debug("Tim test")
  
     def OnData(self, data):
@@ -52,3 +58,5 @@ class Pair:
     
     def Investable(self):
         return (self.volume.Current.Value > self.minimumVolume)
+
+
