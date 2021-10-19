@@ -1,6 +1,6 @@
 from AlgorithmImports import *
 
-class CreativeRedHornet(QCAlgorithm):
+class TradingBot(QCAlgorithm):
 
     def Initialize(self):
         self.SetStartDate(2019, 1, 1)
